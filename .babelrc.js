@@ -10,17 +10,17 @@ module.exports = {
         ],
         "@babel/preset-react"
     ],
-    "plugins": [
-        // 使用babel-plugin-import 对ant按需加载
-        ["import",
-            {
-                "libraryName": "antd",
-                "libraryDirectory": "es",
-                "style": false // `style: true` 会加载 less 文件
-            }
-        ],
-        "@babel/plugin-proposal-class-properties",
-        "@babel/plugin-proposal-export-default-from",
-        "@babel/plugin-proposal-optional-chaining"
-    ]
+    // "plugins": [
+    //     // 使用babel-plugin-import 对ant按需加载
+    //     ["import",
+    //         {
+    //             "libraryName": "antd",
+    //             "libraryDirectory": "es",
+    //             "style": false // `style: true` 会加载 less 文件
+    //         }
+    //     ],
+    //     "@babel/plugin-proposal-class-properties",
+    //     "@babel/plugin-proposal-export-default-from",
+    //     "@babel/plugin-proposal-optional-chaining"
+    // ]
 };
