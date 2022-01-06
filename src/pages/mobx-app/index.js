@@ -8,6 +8,6 @@ import ReactDOM from 'react-dom';
 // 这种在JS中混合写入类似于HTML的语法叫做JSX语法，符合XML规范的JS
 // JSX语法的本质还是在运行的时候，被babel转换成React.createElement形式来执行的
 
-const myDiv = <div id="my-div" title="my div">这是一个div元素</div>
+const myDiv = <div id="my-div" title="my div">这是一个div元素</div>;
 
-ReactDOM.render(myDiv, document.getElementById("app"))
+ReactDOM.render(myDiv, document.getElementById("app"));

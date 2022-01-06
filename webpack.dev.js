@@ -6,7 +6,7 @@ const pages = require("./page.config");
 const pagesPlugins = [];
 const entryObjs = {};
 pages.forEach(page => {
-    entryObjs[page.name] = `./src/${page.name}/index.js`;
+    entryObjs[page.name] = `./src/${page.entry}`;
     pagesPlugins.push(new htmlWebpackPlugin({
         title: page.name,
         template: path.join(__dirname, `src/${page.template}`), // 源文件
@@ -28,6 +28,15 @@ module.exports = {
                 test: /\.js|jsx$/,
                 use: "babel-loader",
                 exclude: /node_modules/ // exclude千万别忘记
+            }, {
+                test: /\.js|jsx$/,
+                enforce: 'pre',
+                use: [{
+                    loader: "eslint-loader",
+                    options: {fix: true}
+                }],
+                include: path.resolve(__dirname, './src/**/*.js'),
+                exclude: /node_modules/
             }
         ],
     },
