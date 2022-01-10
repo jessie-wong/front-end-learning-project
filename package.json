@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "前端react-web项目",
   "main": "./src/index.js",
-  "proxy":"localhost:3000",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "set NODE_OPTIONS=--max-old-space-size=8192 && webpack-dev-server --color --config webpack.dev.js",
@@ -24,6 +23,7 @@
     "babel-plugin-import": "^1.13.3",
     "connect-history-api-fallback": "^1.6.0",
     "core-js": "^3.20.2",
+    "cors": "^2.8.5",
     "css-loader": "^5.0.1",
     "eslint": "^8.6.0",
     "eslint-loader": "^4.0.2",

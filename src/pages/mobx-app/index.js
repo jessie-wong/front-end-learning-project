@@ -11,7 +11,7 @@ import ReactDOM from 'react-dom';
 export default function MobxApp() {
     const [name, setName] = useState();
     useEffect(() => {
-        fetch("/api")
+        fetch("http://localhost:3000")
           .then((res) => {
               return res.json();
             })
