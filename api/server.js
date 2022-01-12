@@ -17,6 +17,9 @@ app.get("/mobx-app", function (req, res) {
   res.json({ "name": "张三" })
   // res.send("nihao")
 })
+app.post("/other-app", function (req, res) {
+  res.json({other: "OKK"});
+})
 
 app.listen(3000, () => {
   console.log("app listening on port 3000")
