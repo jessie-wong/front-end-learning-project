@@ -13,12 +13,17 @@ export default function MenuList() {
             style={{ height: 'calc(100vh - 64px)' }}
         >
             <SubMenu title="study" key='study'>
-                <Menu.Item key='mobx'>
+                <Menu.Item key='mobx-app'>
                     <Link to={'/mobx-app'}>
                         {'Mobx'}
                     </Link>
                 </Menu.Item>
-                <Menu.Item key='other'>
+                <Menu.Item key='css-layout'>
+                    <Link to={'/css-layout'}>
+                        {'布局'}
+                    </Link>
+                </Menu.Item>
+                <Menu.Item key='other-app'>
                     <Link to={'/other-app'}>
                         {'Other'}
                     </Link>

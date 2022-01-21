@@ -8,7 +8,7 @@ module.exports = merge(commonjs, {
     devServer: {
         open: true,
         contentBase: path.join(__dirname, "./dist/"),
-        historyApiFallback: true, //不跳转
+        historyApiFallback: true, //不跳转；刷新页面不会报错【即会对404页面响应index.html】
         inline: true, //实时刷新
         hot: true, // 开启热更新,
         port: 8000,

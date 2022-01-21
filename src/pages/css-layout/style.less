@@ -1,0 +1,61 @@
+.container {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(14, 1fr);
+    row-gap: 10px;
+    column-gap: 10px;
+    
+    
+    .header1 {
+        background: red;
+        grid-row: 1 / span 2;
+    }
+    .header2 {
+        background: rebeccapurple;
+        grid-row: 1 / span 2;
+    }
+    .header3 {
+        background: red;
+        grid-row: 1 / span 2;
+    }
+    .header4 {
+        background: rebeccapurple;
+        grid-row: 1 / span 2;
+    }
+    .map {
+        background: green;
+        grid-row: 3 / span 9;
+        grid-column: 2 / span 2;
+    }
+
+    .sider1{
+        background: blue;
+        grid-row: 3 / span 6;
+    }
+    .sider2{
+        background: blue;
+        grid-row: 3 / span 6;
+    }
+    .sider3{
+        background: burlywood;
+        grid-row: 9 / span 6;
+    }
+    .sider4{
+        background: burlywood;
+        grid-row: 9 / span 6;
+    }
+
+    .botton1 {
+        background: black;
+        grid-row: 12 / span 3;
+        grid-column: 2 / span 1;
+        
+    }
+    .botton2 {
+        background: brown;
+        grid-row: 12 / span 3;
+        grid-column: 3 / span 1;
+    }
+}
