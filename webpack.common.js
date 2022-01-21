@@ -8,9 +8,11 @@ const htmlWebpackPlugin = require("html-webpack-plugin") // 导入 在内存中�
 // pages.forEach(page => {
 //     entryObjs[page.name] = `./src/${page.entry}`;
 //     pagesPlugins.push(new htmlWebpackPlugin({
-//         title: page.name,
-//         template: path.join(__dirname, `src/${page.template}`), // 源文件
-//         filename: path.join(__dirname, `dist/${page.name}.html`) // 生成的 内存中首页的 名称
+//         title: page.name, // 用于生成的 HTML 文档的标题
+//         template: path.join(__dirname, `src/${page.template}`), // webpack模板的相对或绝对路径
+//         filename: path.join(__dirname, `dist/${page.name}.html`), // 将 HTML 写入到的文件
+//         inject: true, // true || 'head' || 'body' || false将所有资产注入给定的template or templateContent
+//         chunks: [page.name] // 不配置chunks会导致多个入口同时进入；允许您仅添加一些块（例如，仅单元测试块）
 //     }));
 // })
 
@@ -20,7 +22,6 @@ const page = new htmlWebpackPlugin({ template: path.join(__dirname, 'src/html-te
 // 向外暴露一个打包的实例对象，因为webpack是基于Node构建的，所以webpack支持所有Node API和语法
 // webpack 默认只能打包处理.js后缀名类型的文件，想.vue .png无法主动处理，所以要配置第三方的loader
 module.exports = {
-    mode: 'development', // development 或 production
     // entry: entryObjs,
     // plugins: pagesPlugins,
     plugins: [page],
@@ -48,7 +49,7 @@ module.exports = {
         }
     },
     output: {
-        path: path.join(__dirname, 'dist'),
-        filename: '[name]/bundle.js'
+        path: path.resolve(__dirname, './dist'),
+        filename: 'res/[name]/bundle.js'
     }
 }
