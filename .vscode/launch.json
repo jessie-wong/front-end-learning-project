@@ -1,0 +1,19 @@
+
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+        "type": "chrome",
+        "request": "launch",
+        "name": "Launch Chrome",
+        "url": "http://localhost:8000/mobx-app",  // 改为目标 url
+        "sourceMaps": true,
+        "webRoot": "${workspaceFolder}",
+        "skipFiles": [
+            "node_modules/**"
+        ],
+        "sourceMapPathOverrides": {
+            "webpack:///*": "${webRoot}/*"
+        }
+    }]
+}
