@@ -11,7 +11,6 @@
     "express-server": "nodemon ./src/api/express-demo.js",
     "express-route": "nodemon ./src/api/route/index.js",
     "express-middleware": "nodemon ./src/api/express-middleware.js"
-
   },
   "repository": {
     "type": "git",
@@ -35,6 +34,7 @@
     "express": "^4.17.2",
     "less": "^4.1.0",
     "less-loader": "^7.2.1",
+    "lodash": "^4.17.21",
     "mobx": "^6.3.13",
     "mobx-react": "^7.2.1",
     "nodemon": "^2.0.15",
