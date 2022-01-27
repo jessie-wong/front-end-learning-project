@@ -1,5 +1,5 @@
 // 导入包
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ReactState from './learn-react/react-state';
 
 // HTML是最优秀的标记语言；
@@ -27,8 +27,25 @@ export default function OtherApp() {
             clearInterval(interval);
         }
     });
+    const domRef = useRef();
+    useEffect(() => {
+        console.log('宽度', domRef?.current?.offsetWidth);
+            // console.log('高度', domRef.current.scrollHeight);
+        console.log('高度', domRef?.current?.offsetHeight);
+        window.addEventListener('resize', () => {
+            console.log('宽度', domRef.current.offsetWidth);
+            // console.log('宽度', domRef.current.clientWidth);
+            // console.log('高度', domRef.current.scrollHeight);
+            console.log('高度', domRef.current.offsetHeight);
+        })
+    }, [domRef.current]);
     return (
-        <ReactState name={name} />
+        <div>
+            <ReactState name={name} />
+            <div style={{height: '60px', border: '1px blue solid', textAlign: 'center'}} ref={domRef}>
+                <div style={{ display: 'inline-block', width: '25px', height: '25px', background: 'red'}} />
+            </div>
+        </div>
     );
 }
 

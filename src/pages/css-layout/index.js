@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import GridLayout from './grid-layout';
 import ScrollTable from './learn-css/scroll-table';
 import './style.less';
+import TableScroll from './table-scroll';
 
 // HTML是最优秀的标记语言；
 // 注意：在JS文件中，默认不能写类似于HTML的标记语言，否则打包会失败
@@ -16,6 +17,7 @@ export default function CSSLayout() {
     <div>
       {/* <GridLayout /> */}
       <ScrollTable />
+      <TableScroll />
     </div>
   );
 }
