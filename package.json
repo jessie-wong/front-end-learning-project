@@ -10,7 +10,7 @@
     "nodemon-server": "DEBUG=* nodemon ./src/api/nodemon-demo.js",
     "express-server": "nodemon ./src/api/express-demo.js",
     "express-route": "nodemon ./src/api/route/index.js",
-    "express-middleware": "nodemon ./src/api/express-middleware.js"
+    "express-middleware": "nodemon ./src/api/middle-ware/express-middleware.js"
   },
   "repository": {
     "type": "git",
