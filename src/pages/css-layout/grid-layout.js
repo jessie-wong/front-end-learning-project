@@ -11,20 +11,18 @@ import './style.less';
 export default function GridLayout() {
 
   return (
-    <div>
-      <div className='container'>
-        <div className='header1'></div>
-        <div className='header2'></div>
-        <div className='header3'></div>
-        <div className='header4'></div>
-        <div className='sider1'></div>
-        <div className='sider2'></div>
-        <div className='map'></div>
-        <div className='sider3'></div>
-        <div className='sider4'></div>
-        <div className='botton1'></div>
-        <div className='botton2'></div>
-      </div>
+    <div className='container'>
+      <div className='header1'></div>
+      <div className='header2'></div>
+      <div className='header3'></div>
+      <div className='header4'></div>
+      <div className='sider1'></div>
+      <div className='sider2'></div>
+      <div className='map'></div>
+      <div className='sider3'></div>
+      <div className='sider4'></div>
+      <div className='botton1'></div>
+      <div className='botton2'></div>
     </div>
   );
 }

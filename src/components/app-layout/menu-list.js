@@ -23,6 +23,11 @@ export default function MenuList() {
                         {'布局'}
                     </Link>
                 </Menu.Item>
+                <Menu.Item key='components-store'>
+                    <Link to={'/components-store'}>
+                        {'组件库'}
+                    </Link>
+                </Menu.Item>
                 <Menu.Item key='other-app'>
                     <Link to={'/other-app'}>
                         {'Other'}
