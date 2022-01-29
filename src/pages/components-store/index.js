@@ -6,27 +6,27 @@ import './style.less';
 import ScrollBoard from './scroll-table/scroll-table-datav-raw';
 import { Radio } from 'antd';
 import ScrollTableDemo from './scroll-table/customize-scroll-table';
-
-// HTML是最优秀的标记语言；
-// 注意：在JS文件中，默认不能写类似于HTML的标记语言，否则打包会失败
-// 可以使用babel来转换这些JS中的标记
-// 这种在JS中混合写入类似于HTML的语法叫做JSX语法，符合XML规范的JS
-// JSX语法的本质还是在运行的时候，被babel转换成React.createElement形式来执行的
 const CONFIG = {
-  header: ['时间段', '发电量均值\n', '日前均值<br />(元/MWh)'],
-  data: [
-    [`00:00-07:00`, 5, '100'],
-    [`07:00-07:00`, 80, '200'],
-    [`08:00-07:00`, 300, '80'],
-    [`11:00-07:00`, 60, '100']
-  ],
   rowNum: 3,
-  carousel: 'page'
-  
+  carousel: 'single'
 };
 export default function ComponentsStore() {
   const [start, setStart] = useState(true);
-
+  const [columns] = useState([{
+    title: '时间段', dataIndex: 'time', render: (text, record, index) => text
+  },
+  {
+    title: '发电量均值', dataIndex: 'elec', render: (text, record, index) => text
+  },
+  {
+    title: <div>日前均值(元/MWh)</div>, dataIndex: 'ahead', render: (text, record, index) => text
+  }]);
+  const [dataSource] = useState([
+    { time: '00:00-07:00', elec: 5, ahead: 100 },
+    { time: '07:00-08:00', elec: 5, ahead: 100 },
+    { time: '08:00-09:00', elec: 5, ahead: 100 },
+    { time: '09:00-10:00', elec: 5, ahead: 100 }
+  ]);
   return (
     <div>
       <h1>自制滚动表格</h1>
@@ -34,7 +34,7 @@ export default function ComponentsStore() {
       <br />
       <br />
       <h1>datav源码</h1>
-      <ScrollBoard config={CONFIG} startScroll={start} style={{ width: '500px', height: '220px' }}/>
+      <ScrollBoard config={CONFIG} autoPlay={start} columns={columns} dataSource={dataSource} style={{ width: '500px', height: '220px' }} />
       {/* <TableScroll /> */}
       <Radio onClick={() => setStart(!start)} checked={start}>启用轮播</Radio>
       <br />

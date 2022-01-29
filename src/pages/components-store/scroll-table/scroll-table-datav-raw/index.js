@@ -62,7 +62,7 @@ const defaultConfig = {
    * @type {Number}
    * @default headerHeight = 35
    */
-  headerHeight: 35,
+  headerHeight: 55,
   /**
    * @description Column width
    * @type {Array<Number>}
@@ -104,6 +104,7 @@ const defaultConfig = {
   hoverPause: true
 }
 
+// 增加行号
 function calcHeaderData({ header, index, indexHeader }) {
   if (!header.length) {
     return []
@@ -111,7 +112,7 @@ function calcHeaderData({ header, index, indexHeader }) {
 
   header = [...header]
 
-  if (index) header.unshift(indexHeader)
+  // if (index) header.unshift(indexHeader)
 
   return header
 }
@@ -151,7 +152,7 @@ function calcAligns(mergedConfig, header) {
   return mergeDeep(aligns, align)
 }
 
-const ScrollBoard = forwardRef(({ onClick, config = {}, className, style, onMouseOver, startScroll }, ref) => {
+const ScrollBoard = forwardRef(({ onClick, config = {}, className, style, onMouseOver, autoPlay, columns, dataSource }, ref) => {
   const { width, height, domRef } = useAutoResize(ref)
 
   const [state, setState] = useState({
@@ -195,7 +196,9 @@ const ScrollBoard = forwardRef(({ onClick, config = {}, className, style, onMous
   function calcData() {
     const mergedConfig = mergeDeep(
       cloneDeep(defaultConfig),
-      config || {}
+      config || {},
+      { header: columns },
+      { data: dataSource }
     )
 
     const header = calcHeaderData(mergedConfig)
@@ -289,14 +292,13 @@ const ScrollBoard = forwardRef(({ onClick, config = {}, className, style, onMous
     setState(state => ({ ...state, heights: newHeights }))
   }
 
-  function emitEvent(handle, ri, ci, row, ceil) {
-    const { ceils, rowIndex } = row
+  function emitEvent(handle, ri, ci, ceils, rowIndex, ceil) {
 
     handle && handle({ row: ceils, ceil, rowIndex, columnIndex: ci })
   }
 
-  function handleHover(enter, ri, ci, row, ceil) {
-    if (enter) emitEvent(onMouseOver, ri, ci, row, ceil)
+  function handleHover(enter, ri, ci, ceils, dataIndex, ceil) {
+    if (enter) emitEvent(onMouseOver, ri, ci, ceils, dataIndex, ceil)
 
     if (!mergedConfig.hoverPause) return
 
@@ -311,22 +313,16 @@ const ScrollBoard = forwardRef(({ onClick, config = {}, className, style, onMous
   const task = useRef({})
 
   useEffect(() => {
-    const { pause, resume } = task.current
-
-    !startScroll && pause();
-  }, [startScroll]);
-
-useEffect(() => {
-  calcData()
-}, [config, domRef.current]);
+    calcData()
+  }, [config, domRef.current, columns, dataSource]);
 
   useEffect(() => {
 
-    let start = startScroll
+    let start = autoPlay
 
-    function * loop() {
-      while (startScroll) {
-        yield * animation(start)
+    function* loop() {
+      while (autoPlay) {
+        yield* animation(start)
 
         start = false
 
@@ -348,7 +344,7 @@ useEffect(() => {
     task.current = co(loop)
 
     return task.current.end
-  }, [config, domRef.current, startScroll])
+  }, [config, domRef.current, autoPlay, columns, dataSource])
 
   // 初次计算宽高
   useEffect(onResize, [width, height, domRef.current])
@@ -369,13 +365,16 @@ useEffect(() => {
               className='header-item'
               key={`${headerItem}-${i}`}
               style={{
-                height: `${mergedConfig.headerHeight}px`,
-                lineHeight: `${mergedConfig.headerHeight}px`,
-                width: `${widths[i]}px`
+                // height: `${mergedConfig.headerHeight}px`,
+                height: '100%',
+                // lineHeight: `${mergedConfig.headerHeight}px`,
+                // width: `${widths[i]}px`
+                width: headerItem.width || `${100 / mergedConfig.rowNum }%`
               }}
               align={aligns[i]}
-              dangerouslySetInnerHTML={{ __html: headerItem }}
-            />
+            >
+              {headerItem.title}
+            </div>
           ))}
         </div>
       )}
@@ -388,27 +387,32 @@ useEffect(() => {
               (header.length ? mergedConfig.headerHeight : 0)}px`
           }}
         >
-          {rows.map((row, ri) => (
+          {rows.map(({ceils, scroll, rowIndex}, ri) => (
             <div
               className='row-item'
-              key={`${row.toString()}-${row.scroll}`}
+              key={`${ceils.toString()}-${scroll}`}
               style={{
                 height: `${heights[ri]}px`,
                 lineHeight: `${heights[ri]}px`,
-                backgroundColor: `${getBackgroundColor(row.rowIndex)}`
+                backgroundColor: `${getBackgroundColor(rowIndex)}`
               }}
             >
-              {row.ceils.map((ceil, ci) => (
+              {header.map((ceil, ci) => (
                 <div
                   className='ceil'
-                  key={`${ceil}-${ri}-${ci}`}
-                  style={{ width: `${widths[ci]}px` }}
+                  key={`${ceil.dataIndex}-${ri}-${ci}`}
+                  style={{
+                    // width: `${widths[ci]}px`
+                    width: ceil.width || `${100 / mergedConfig.rowNum }%`
+                  }}
                   align={aligns[ci]}
-                  dangerouslySetInnerHTML={{ __html: ceil }}
-                  onClick={() => emitEvent(onClick, ri, ci, row, ceil)}
-                  onMouseEnter={() => handleHover(true, ri, ci, row, ceil)}
+                  // dangerouslySetInnerHTML={{ __html: ceil }}
+                  onClick={() => emitEvent(onClick, ri, ci, ceils, rowIndex, ceil)}
+                  onMouseEnter={() => handleHover(true, ri, ci, ceils, ceil)}
                   onMouseLeave={() => handleHover(false)}
-                />
+                >
+                  {ceil.render ? ceil.render(ceils[ceil.dataIndex], ceils, ri) : ceils[ceil.dataIndex] || '-'}
+                </div>
               ))}
             </div>
           ))}
@@ -423,7 +427,10 @@ ScrollBoard.propTypes = {
   onClick: PropTypes.func,
   onMouseOver: PropTypes.func,
   className: PropTypes.string,
-  style: PropTypes.object
+  style: PropTypes.object,
+  dataSource: PropTypes.array,
+  columns: PropTypes.array,
+  autoPlay: PropTypes.bool
 }
 
-export default ScrollBoard
+export default React.memo(ScrollBoard)
