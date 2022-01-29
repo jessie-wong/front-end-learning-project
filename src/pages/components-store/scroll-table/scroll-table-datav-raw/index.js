@@ -316,8 +316,11 @@ const ScrollBoard = forwardRef(({ onClick, config = {}, className, style, onMous
     !startScroll && pause();
   }, [startScroll]);
 
+useEffect(() => {
+  calcData()
+}, [config, domRef.current]);
+
   useEffect(() => {
-    calcData()
 
     let start = startScroll
 
@@ -347,6 +350,7 @@ const ScrollBoard = forwardRef(({ onClick, config = {}, className, style, onMous
     return task.current.end
   }, [config, domRef.current, startScroll])
 
+  // 初次计算宽高
   useEffect(onResize, [width, height, domRef.current])
 
   const classNames = useMemo(() => classnames('dv-scroll-board', className), [

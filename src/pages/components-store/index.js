@@ -20,7 +20,9 @@ const CONFIG = {
     [`08:00-07:00`, 300, '80'],
     [`11:00-07:00`, 60, '100']
   ],
-  rowNum: 3
+  rowNum: 3,
+  carousel: 'page'
+  
 };
 export default function ComponentsStore() {
   const [start, setStart] = useState(true);
@@ -28,7 +30,7 @@ export default function ComponentsStore() {
   return (
     <div>
       <h1>自制滚动表格</h1>
-      <ScrollTable />
+      {/* <ScrollTable /> */}
       <br />
       <br />
       <h1>datav源码</h1>
@@ -38,7 +40,7 @@ export default function ComponentsStore() {
       <br />
       <br />
       <h1>支持自定义内容-自制滚动表格</h1>
-      <ScrollTableDemo />
+      {/* <ScrollTableDemo /> */}
 
     </div>
   );
