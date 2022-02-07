@@ -24,6 +24,15 @@ module.exports = merge(commonjs, {
             }, {
                 test: /\.less$/,
                 use: ['style-loader', 'css-loader', 'less-loader']
+            },{
+                test: /\.svg$/,
+                // exclude: /node_modules/,
+                use: 'file-loader'
+            },
+            {
+                test: /\.(png|jpe?g|gif|woff|woff2|ttf|eot|otf|webm|xlsx)$/,
+                // exclude: /node_modules/,
+                use: 'file-loader'
             }
         ],
     }

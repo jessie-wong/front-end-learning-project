@@ -6,6 +6,8 @@ import './style.less';
 import ScrollBoard from './scroll-table/scroll-table-datav-raw';
 import { Radio } from 'antd';
 import ScrollTableDemo from './scroll-table/customize-scroll-table';
+import Example from './scroll-table/react-awesome-swiper-table';
+import AutoPlayMethods from './scroll-table/react-slick-table';
 const CONFIG = {
   rowNum: 3,
   carousel: 'single'
@@ -29,19 +31,24 @@ export default function ComponentsStore() {
   ]);
   return (
     <div>
-      <h1>自制滚动表格</h1>
+      {/* <h1>自制滚动表格</h1> */}
       {/* <ScrollTable /> */}
       <br />
       <br />
-      <h1>datav源码</h1>
-      <ScrollBoard config={CONFIG} autoPlay={start} columns={columns} dataSource={dataSource} style={{ width: '500px', height: '220px' }} />
+      {/* <h1>datav源码</h1> */}
+      {/* <ScrollBoard config={CONFIG} autoPlay={start} columns={columns} dataSource={dataSource} style={{ width: '500px', height: '220px' }} /> */}
       {/* <TableScroll /> */}
-      <Radio onClick={() => setStart(!start)} checked={start}>启用轮播</Radio>
+      {/* <Radio onClick={() => setStart(!start)} checked={start}>启用轮播</Radio> */}
       <br />
       <br />
-      <h1>支持自定义内容-自制滚动表格</h1>
+      {/* <h1>支持自定义内容-自制滚动表格</h1> */}
       {/* <ScrollTableDemo /> */}
-
+      <br />
+      <br />
+      <h1>基于awesome-swiper</h1>
+      <Example />
+      <h1>基于react-stick</h1>
+      <AutoPlayMethods />
     </div>
   );
 }
