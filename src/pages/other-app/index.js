@@ -1,5 +1,6 @@
 // 导入包
 import React, { useEffect, useRef, useState } from 'react';
+import LearnHook from './learn-hook';
 import ReactState from './learn-react/react-state';
 
 // HTML是最优秀的标记语言；
@@ -45,6 +46,7 @@ export default function OtherApp() {
             <div style={{height: '60px', border: '1px blue solid', textAlign: 'center'}} ref={domRef}>
                 <div style={{ display: 'inline-block', width: '25px', height: '25px', background: 'red'}} />
             </div>
+            <LearnHook />
         </div>
     );
 }
